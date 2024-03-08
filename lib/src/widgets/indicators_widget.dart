@@ -6,7 +6,7 @@ class IndicatorsWidget extends StatelessWidget {
     required this.indicatorActiveColor,
     required this.indicatorDeactiveColor,
     required this.sliderDuration,
-    required this.imagesLink,
+    required this.items,
     required this.actualIndex,
   });
 
@@ -14,13 +14,13 @@ class IndicatorsWidget extends StatelessWidget {
   final Duration sliderDuration;
   final Color indicatorActiveColor;
   final Color indicatorDeactiveColor;
-  final List<String> imagesLink;
+  final List<Widget> items;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
         alignment: WrapAlignment.center,
-        children: imagesLink.asMap().entries.map((entire) {
+        children: items.asMap().entries.map((entire) {
           return AnimatedContainer(
             margin: const EdgeInsets.symmetric(horizontal: 8),
             duration: sliderDuration,

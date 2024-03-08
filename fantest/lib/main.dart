@@ -42,11 +42,28 @@ class HomePage extends StatelessWidget {
               height: 100,
             ),
             FanCarouselImageSlider(
-              imagesLink: sampleImages,
-              isAssets: false,
+              // imagesLink: sampleImages,
+              // isAssets: false,
+              items: sampleImages.map((element) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.network(
+                      element,
+                      width: 187,
+                      height: 260,
+                      fit: BoxFit.cover,
+                    ),
+                    Text('Kalisa')
+                  ],
+                );
+              }).toList(),
+              sliderHeight: 331,
               autoPlay: false,
-              sidesOpacity: 0.8,
-              slideViewportFraction: 0.7,
+              sidesOpacity: 1,
+              slideViewportFraction: 0.5,
+              isClickable: false,
+              showIndicator: false,
               // expandImageWidth: 1,
               turns: 180,
               currentItemShadow: [],

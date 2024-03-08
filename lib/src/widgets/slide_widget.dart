@@ -8,10 +8,11 @@ class SlideWidget extends StatelessWidget {
     required this.index,
     required this.actualIndex,
     required this.sliderDuration,
-    required this.isAssets,
-    required this.imageLink,
-    required this.imageFitMode,
-    required this.imageRadius,
+    required this.item,
+    // required this.isAssets,
+    // required this.imageLink,
+    // required this.imageFitMode,
+    // required this.imageRadius,
     required this.sidesOpacity,
     required this.turns,
     required this.currentItemShadow,
@@ -24,10 +25,10 @@ class SlideWidget extends StatelessWidget {
   final int index;
   final int actualIndex;
   final Duration sliderDuration;
-  final bool isAssets;
-  final String imageLink;
-  final BoxFit imageFitMode;
-  final double imageRadius;
+  // final bool isAssets;
+  final Widget item;
+  // final BoxFit imageFitMode;
+  // final double imageRadius;
   final double sidesOpacity;
   final double turns;
   final List<BoxShadow>? currentItemShadow;
@@ -41,27 +42,28 @@ class SlideWidget extends StatelessWidget {
       child: AnimatedContainer(
         duration: sliderDuration,
         margin: (index == actualIndex)
-            ? const EdgeInsets.symmetric(horizontal: 8, vertical: 16)
+            ? const EdgeInsets.only(left: 8, right: 8, top: 8)
             : const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(imageRadius),
+          // borderRadius: BorderRadius.circular(imageRadius),
           boxShadow: _getSlideBoxShadow(index, actualIndex),
         ),
         child: AnimatedOpacity(
           duration: sliderDuration,
           opacity: (index == actualIndex) ? 1 : sidesOpacity,
-          child: InkWell(
+          child: GestureDetector(
             onTap: () => onSlideClick(),
             child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(imageRadius),
-                image: DecorationImage(
-                  image: (!isAssets)
-                      ? NetworkImage(imageLink)
-                      : AssetImage(imageLink) as ImageProvider,
-                  fit: imageFitMode,
-                ),
-              ),
+              child: item,
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(imageRadius),
+              //   image: DecorationImage(
+              //     image: (!isAssets)
+              //         ? NetworkImage(imageLink)
+              //         : AssetImage(imageLink) as ImageProvider,
+              //     fit: imageFitMode,
+              //   ),
+              // ),
             ),
           ),
         ),
@@ -72,9 +74,10 @@ class SlideWidget extends StatelessWidget {
   List<BoxShadow>? _getSlideBoxShadow(index, actualIndex) =>
       (index == actualIndex) ? currentItemShadow : sideItemsShadow;
 
-  double _getSlideTurn(int currentIndex, actualCurrentIndex) => (currentIndex < actualCurrentIndex)
-      ? -pi / turns
-      : (currentIndex > actualCurrentIndex)
-          ? pi / turns
-          : 0;
+  double _getSlideTurn(int currentIndex, actualCurrentIndex) =>
+      (currentIndex < actualCurrentIndex)
+          ? -pi / turns
+          : (currentIndex > actualCurrentIndex)
+              ? pi / turns
+              : 0;
 }
