@@ -50,15 +50,16 @@ class HomePage extends StatelessWidget {
                   children: [
                     Image.network(
                       element,
+                      height: 280,
                       width: 187,
-                      height: 260,
                       fit: BoxFit.cover,
                     ),
-                    Text('Kalisa')
+                    const SizedBox(height: 10),
+                    const Text('Test')
                   ],
                 );
               }).toList(),
-              sliderHeight: 331,
+              sliderHeight: 332,
               autoPlay: false,
               sidesOpacity: 1,
               slideViewportFraction: 0.5,
